@@ -166,8 +166,3 @@ docker-compose up --build
   🌐 GitHub: [https://github.com/quangnhatphiyen](https://github.com/quangnhatphiyen)
 
 ```
-
----
-
-Bạn có muốn mình viết thêm **hướng dẫn cách commit & push lên GitHub** vào file README luôn không?
-```
