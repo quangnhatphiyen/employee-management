@@ -26,25 +26,56 @@
 
 ```
 project-root/
-│── backend/                      # Backend (Express)
+│── backend/                      # Thư mục chứa backend
 │   ├── src/
-│   │   ├── routes/               # Định nghĩa API endpoints
+│   │   ├── config/               # Cấu hình (DB, env, etc.)
+│   │   │   └── db.js
+│   │   ├── models/               # Định nghĩa bảng (ORM hoặc query)
+│   │   │   └── employee.model.js
 │   │   ├── controllers/          # Xử lý request
-│   │   ├── services/             # Logic nghiệp vụ
-│   │   ├── config/               # Cấu hình (Firebase, Twilio, Email…)
-│   │   └── app.js                # Entry point Express
-│   └── package.json
+│   │   │   ├── auth.controller.js
+│   │   │   ├── employee.controller.js
+│   │   │   └── owner.controller.js
+│   │   ├── services/             # Xử lý business logic
+│   │   │   └── employee.service.js
+│   │   ├── routes/               # Các endpoint API
+│   │   │   ├── auth.routes.js
+│   │   │   ├── employee.routes.js
+│   │   │   └── owner.routes.js
+│   │   ├── utils/                # Tiện ích (hash password, JWT,…)
+│   │   │   ├── jwt.js
+│   │   │   └── password.js
+│   │   ├── app.js                # Cấu hình Express
+│   │   └── server.js             # Chạy server (Express + Socket.io)
+│   ├── package.json
+│   └── .env                      # Env: DB_URL, JWT_SECRET, TWILIO_KEY...
 │
-│── frontend/                     # Frontend (React/Vite)
+│── frontend/                     # Thư mục chứa frontend (Vite + React)
 │   ├── src/
-│   │   ├── components/           # UI components
-│   │   ├── pages/                # Trang (Login, Dashboard…)
-│   │   ├── services/             # Gọi API
-│   │   └── App.jsx
-│   └── package.json
+│   │   ├── assets/               # Ảnh, icon
+│   │   ├── components/           # Components tái sử dụng
+│   │   │   ├── FormInput.jsx
+│   │   │   └── Navbar.jsx
+│   │   ├── pages/                # Các trang chính
+│   │   │   ├── Login.jsx
+│   │   │   ├── Dashboard.jsx
+│   │   │   ├── EmployeeList.jsx
+│   │   │   └── Chat.jsx
+│   │   ├── services/             # Gọi API tới backend
+│   │   │   ├── api.js
+│   │   │   └── auth.js
+│   │   ├── context/              # Context API (Auth, User, Socket,…)
+│   │   │   ├── AuthContext.jsx
+│   │   │   └── SocketContext.jsx
+│   │   ├── App.jsx
+│   │   └── main.jsx
+│   ├── vite.config.js
+│   ├── package.json
+│   └── .env                      # Env: VITE_API_URL,...
 │
-│── README.md                     # Tài liệu hướng dẫn
-│── screenshots/                  # Ảnh chụp màn hình ứng dụng
+│── docker-compose.yml             # Nếu bạn muốn chạy backend + db bằng Docker
+│── README.md
+
 ```
 
 ---
