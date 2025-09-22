@@ -1,189 +1,173 @@
 
-# 🚀 Real-Time Employee Task Management Tool
+# Real-Time Employee Task Management Tool 🚀
 
-## 📖 Giới thiệu
+Một hệ thống quản lý nhân sự **real-time** bao gồm:
+- 👨‍💼 Quản lý nhân viên
+- ✅ Quản lý công việc
+- 🔑 Đăng nhập/Đăng ký + phân quyền
+- 💬 Chat real-time (Socket.io)
+- 📊 Dashboard quản lý trực quan  
 
-Đây là ứng dụng **Quản lý công việc nhân viên theo thời gian thực**, cho phép quản lý:
-
-* Quản lý tài khoản (Manager/Employee).
-* Thêm, sửa, xóa nhân viên.
-* Tạo và phân công công việc.
-* Cập nhật trạng thái công việc theo thời gian thực.
-* Chat trực tiếp giữa Manager và Employee (real-time chat với Socket.IO).
-* Xác thực tài khoản thông qua SMS/Email (Firebase + Twilio/Email API).
-
-Ứng dụng được xây dựng với:
-
-* **Frontend**: React (CRA / Vite / Next.js).
-* **Backend**: Node.js + Express.
-* **Database**: Firebase (Firestore/Auth).
-* **Realtime**: Socket.IO.
-* **SMS/Email**: Twilio hoặc dịch vụ gửi mail (SendGrid/SMTP).
+Dự án được xây dựng với **Node.js (Express + Socket.io + PostgreSQL)** cho backend và **React + Vite** cho frontend.
 
 ---
 
-## 🏗 Cấu trúc thư mục
+## 📂 Cấu trúc thư mục
 
-```
+```bash
 project-root/
-│── backend/                      # Thư mục chứa backend
+│── backend/                      # Backend (Node.js + Express + PostgreSQL)
 │   ├── src/
 │   │   ├── config/               # Cấu hình (DB, env, etc.)
-│   │   │   └── db.js
-│   │   ├── models/               # Định nghĩa bảng (ORM hoặc query)
-│   │   │   └── employee.model.js
+│   │   ├── models/               # ORM/Models (Employee, User,...)
 │   │   ├── controllers/          # Xử lý request
-│   │   │   ├── auth.controller.js
-│   │   │   ├── employee.controller.js
-│   │   │   └── owner.controller.js
-│   │   ├── services/             # Xử lý business logic
-│   │   │   └── employee.service.js
-│   │   ├── routes/               # Các endpoint API
-│   │   │   ├── auth.routes.js
-│   │   │   ├── employee.routes.js
-│   │   │   └── owner.routes.js
-│   │   ├── utils/                # Tiện ích (hash password, JWT,…)
-│   │   │   ├── jwt.js
-│   │   │   └── password.js
-│   │   ├── app.js                # Cấu hình Express
-│   │   └── server.js             # Chạy server (Express + Socket.io)
+│   │   ├── services/             # Business logic
+│   │   ├── routes/               # API endpoints
+│   │   ├── utils/                # Tiện ích (JWT, hash password,...)
+│   │   ├── app.js                # Express config
+│   │   └── server.js             # Chạy server + socket.io
 │   ├── package.json
-│   └── .env                      # Env: DB_URL, JWT_SECRET, TWILIO_KEY...
+│   └── .env                      # Env: DB_URL, JWT_SECRET,...
 │
-│── frontend/                     # Thư mục chứa frontend (Vite + React)
+│── frontend/                     # Frontend (React + Vite)
 │   ├── src/
-│   │   ├── assets/               # Ảnh, icon
+│   │   ├── assets/               # Hình ảnh, icon
 │   │   ├── components/           # Components tái sử dụng
-│   │   │   ├── FormInput.jsx
-│   │   │   └── Navbar.jsx
-│   │   ├── pages/                # Các trang chính
-│   │   │   ├── Login.jsx
-│   │   │   ├── Dashboard.jsx
-│   │   │   ├── EmployeeList.jsx
-│   │   │   └── Chat.jsx
-│   │   ├── services/             # Gọi API tới backend
-│   │   │   ├── api.js
-│   │   │   └── auth.js
-│   │   ├── context/              # Context API (Auth, User, Socket,…)
-│   │   │   ├── AuthContext.jsx
-│   │   │   └── SocketContext.jsx
+│   │   ├── pages/                # Các trang (Login, Dashboard,...)
+│   │   ├── services/             # Gọi API backend
+│   │   ├── context/              # Context API (Auth, Socket,...)
 │   │   ├── App.jsx
 │   │   └── main.jsx
 │   ├── vite.config.js
 │   ├── package.json
 │   └── .env                      # Env: VITE_API_URL,...
 │
-│── docker-compose.yml             # Nếu bạn muốn chạy backend + db bằng Docker
+│── docker-compose.yml             # Chạy backend + db bằng Docker (tuỳ chọn)
 │── README.md
-
-```
+````
 
 ---
 
-## ⚙️ Cách cài đặt & chạy
+## ⚙️ Công nghệ sử dụng
 
-### 1️⃣ Clone repo
+### Backend:
+
+* [Node.js](https://nodejs.org/)
+* [Express.js](https://expressjs.com/)
+* [PostgreSQL](https://www.postgresql.org/)
+* \[Sequelize hoặc Knex] (tùy bạn chọn ORM)
+* [JWT](https://jwt.io/) cho xác thực
+* [Socket.io](https://socket.io/) cho chat real-time
+
+### Frontend:
+
+* [React](https://reactjs.org/) + [Vite](https://vitejs.dev/)
+* [TailwindCSS](https://tailwindcss.com/) để styling
+* [Axios](https://axios-http.com/) để gọi API
+* \[Context API] quản lý state (Auth, Socket)
+
+---
+
+## 🚀 Cách chạy dự án
+
+### 1. Clone repo
 
 ```bash
-git clone https://github.com/your-username/real-time-task-manager.git
-cd real-time-task-manager
+git clone https://github.com/<your-username>/Real-Time-Employee-Task-Management-Tool.git
+cd Real-Time-Employee-Task-Management-Tool
 ```
 
-### 2️⃣ Cài đặt backend
+### 2. Cài dependencies
+
+#### Backend
 
 ```bash
 cd backend
 npm install
 ```
 
-Tạo file `.env` trong thư mục `backend/`:
-
-```env
-PORT=5000
-FIREBASE_CONFIG=your_firebase_config
-TWILIO_SID=your_twilio_sid
-TWILIO_AUTH=your_twilio_auth
-EMAIL_SERVICE_CONFIG=your_email_config
-```
-
-Chạy server:
+#### Frontend
 
 ```bash
-npm start
-```
-
-### 3️⃣ Cài đặt frontend
-
-```bash
-cd ../frontend
+cd frontend
 npm install
 ```
 
-Tạo file `.env` trong thư mục `frontend/`:
+### 3. Tạo file `.env`
+
+#### Backend (`backend/.env`)
+
+```env
+PORT=5000
+DB_URL=postgresql://user:password@localhost:5432/employee_db
+JWT_SECRET=your_jwt_secret
+```
+
+#### Frontend (`frontend/.env`)
 
 ```env
 VITE_API_URL=http://localhost:5000
 ```
 
-Chạy client:
+### 4. Chạy ứng dụng
+
+#### Backend
 
 ```bash
+cd backend
 npm run dev
 ```
 
-Ứng dụng sẽ chạy tại:
+#### Frontend
+
+```bash
+cd frontend
+npm run dev
+```
+
+Mở trình duyệt tại:
 👉 Frontend: `http://localhost:5173`
 👉 Backend API: `http://localhost:5000`
 
 ---
 
-## 🔑 Tính năng chính
+## 🐳 Chạy với Docker (tuỳ chọn)
 
-### 👩‍💼 Role Manager
-
-* Đăng nhập qua số điện thoại (OTP gửi bằng SMS).
-* Quản lý nhân viên: thêm, sửa, xóa, xem chi tiết.
-* Phân công & cập nhật công việc.
-* Chat real-time với từng nhân viên.
-
-### 👨‍💻 Role Employee
-
-* Nhận email xác thực để tạo tài khoản.
-* Đăng nhập bằng email/OTP.
-* Xem và cập nhật trạng thái công việc.
-* Chỉnh sửa thông tin cá nhân.
-* Chat real-time với Manager.
+```bash
+docker-compose up --build
+```
 
 ---
 
-## 📡 API chính
+## 📌 Tính năng chính
 
-### Owner (Manager)
-
-* `POST /createAccessCode` → tạo mã OTP và gửi qua SMS.
-* `POST /validateAccessCode` → xác thực OTP.
-* `POST /createEmployee` → thêm nhân viên.
-* `POST /getEmployee` → lấy thông tin nhân viên.
-* `POST /deleteEmployee` → xóa nhân viên.
-
-### Employee
-
-* `POST /loginEmail` → gửi OTP qua email.
-* `POST /validateAccessCode` → xác thực OTP email.
+* 🔑 Đăng nhập/Đăng ký (JWT Authentication)
+* 👨‍💼 Quản lý nhân viên (CRUD)
+* 📋 Quản lý công việc
+* 📊 Dashboard trực quan
+* 💬 Chat real-time giữa nhân viên & quản lý
+* ⚡ Đồng bộ dữ liệu real-time với Socket.io
 
 ---
 
-## 🖼 Screenshots
+## ✨ Hướng phát triển
 
-Ảnh chụp giao diện sẽ nằm trong thư mục `screenshots/`.
+* Gửi thông báo (Notification real-time)
+* Phân quyền nâng cao (Admin/Manager/Employee)
+* Tích hợp CI/CD (GitHub Actions)
+* Deploy lên Vercel (FE) + Render/Heroku (BE)
 
 ---
 
-## 📌 Lưu ý
+## 👨‍💻 Tác giả
 
-* Bật HTTPS khi triển khai để đảm bảo bảo mật.
-* Hash mật khẩu trước khi lưu.
-* Dùng JWT cho session và bảo mật API.
-* Firebase/Firestore làm cơ sở dữ liệu chính.
+* **Quang Nhật Phi Yến** 🚀
+  📧 Liên hệ: \[[your-email@example.com](mailto:your-email@example.com)]
+  🌐 GitHub: [https://github.com/quangnhatphiyen](https://github.com/quangnhatphiyen)
 
+```
 
+---
+
+Bạn có muốn mình viết thêm **hướng dẫn cách commit & push lên GitHub** vào file README luôn không?
+```
